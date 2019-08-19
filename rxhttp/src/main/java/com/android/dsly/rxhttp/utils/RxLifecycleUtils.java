@@ -11,7 +11,7 @@ import io.reactivex.annotations.NonNull;
 
 /**
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2018/9/14
  */
 public final class RxLifecycleUtils {

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-09
  */
 public class GsonFactory {

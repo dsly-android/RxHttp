@@ -22,7 +22,7 @@ import retrofit2.HttpException;
 /**
  * Observer基类
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-12
  */
 public abstract class BaseObserver<T> implements Observer<T> {

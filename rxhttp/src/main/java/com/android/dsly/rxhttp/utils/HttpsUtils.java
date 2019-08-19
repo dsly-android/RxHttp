@@ -23,7 +23,7 @@ import javax.net.ssl.X509TrustManager;
 /**
  * 证书工具类
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-12
  */
 public class HttpsUtils {

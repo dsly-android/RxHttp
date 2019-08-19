@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-09
  */
 public class RetrofitBuilder {

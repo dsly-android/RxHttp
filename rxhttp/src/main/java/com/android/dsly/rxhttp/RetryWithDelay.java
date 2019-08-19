@@ -9,7 +9,8 @@ import io.reactivex.functions.Function;
 
 /**
  * 重试次数和每次重试之间的延迟
- * @author 陈志鹏
+ *
+ * @author dsly
  * @date 2019-08-12
  */
 public class RetryWithDelay implements

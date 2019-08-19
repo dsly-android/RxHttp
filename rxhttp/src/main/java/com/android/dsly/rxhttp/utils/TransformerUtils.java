@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-13
  */
 public class TransformerUtils {

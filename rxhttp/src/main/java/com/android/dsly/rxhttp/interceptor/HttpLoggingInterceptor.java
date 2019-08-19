@@ -24,7 +24,7 @@ import okio.Buffer;
 /**
  * OkHttp拦截器，主要用于打印日志
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-12
  */
 public class HttpLoggingInterceptor implements Interceptor {

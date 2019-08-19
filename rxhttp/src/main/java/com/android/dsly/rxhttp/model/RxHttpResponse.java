@@ -7,7 +7,7 @@ import okhttp3.Headers;
 import okhttp3.ResponseBody;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-15
  */
 public class RxHttpResponse<T> {

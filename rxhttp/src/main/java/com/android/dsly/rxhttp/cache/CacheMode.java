@@ -1,7 +1,7 @@
 package com.android.dsly.rxhttp.cache;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-15
  */
 public enum CacheMode {

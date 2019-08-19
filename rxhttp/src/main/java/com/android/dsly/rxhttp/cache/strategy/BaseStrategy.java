@@ -20,7 +20,7 @@ import okhttp3.Headers;
 import retrofit2.Response;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-15
  */
 public abstract class BaseStrategy<T> {

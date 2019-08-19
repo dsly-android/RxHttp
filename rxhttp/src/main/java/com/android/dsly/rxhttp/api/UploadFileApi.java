@@ -12,7 +12,7 @@ import retrofit2.http.Url;
 /**
  * 文件上传
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-13
  */
 public interface UploadFileApi {

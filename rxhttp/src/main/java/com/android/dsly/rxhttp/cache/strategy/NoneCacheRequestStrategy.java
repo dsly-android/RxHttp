@@ -24,7 +24,7 @@ import retrofit2.Response;
 /**
  * 如果缓存不存在才请求网络，否则使用缓存
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-16
  */
 public class NoneCacheRequestStrategy<T> extends BaseStrategy<T> {

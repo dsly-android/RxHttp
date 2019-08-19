@@ -2,7 +2,8 @@ package com.android.dsly.rxhttp.observer;
 
 /**
  * 通用Observer
- * @author 陈志鹏
+ *
+ * @author dsly
  * @date 2019-08-12
  */
 public abstract class CommonObserver<T> extends BaseObserver<T> {

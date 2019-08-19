@@ -1,4 +1,4 @@
-导入：
+导入：<br>  
 implementation 'com.android.dsly:rxhttp:1.0.0'
 
 正常使用：
@@ -13,8 +13,7 @@ RxHttp.createApi(CommonApi.class)
                     }
                 });
 ```
-多baseurl：
-https://github.com/JessYanCoding/RetrofitUrlManager
+多baseurl：https://github.com/JessYanCoding/RetrofitUrlManager
 
 上传文件：
 ```java

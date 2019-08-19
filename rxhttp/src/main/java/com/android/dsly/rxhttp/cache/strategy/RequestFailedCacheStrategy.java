@@ -24,7 +24,7 @@ import retrofit2.Response;
 /**
  * 请求网络失败后，读取缓存
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-16
  */
 public class RequestFailedCacheStrategy<T> extends BaseStrategy<T> {

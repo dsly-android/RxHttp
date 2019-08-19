@@ -2,7 +2,7 @@ package com.android.dsly.rxhttp;
 
 /**
  *
- * @author 陈志鹏
+ * @author dsly
  * @date 2018/9/14
  */
 public interface IView {

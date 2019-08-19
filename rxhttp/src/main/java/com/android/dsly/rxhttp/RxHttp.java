@@ -26,7 +26,7 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-09
  */
 public class RxHttp {
