@@ -6,7 +6,7 @@ import com.android.dsly.rxhttp.observer.BaseObserver;
 import retrofit2.Response;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-12
  */
 public abstract class DataObserver<T> extends BaseObserver<T> {

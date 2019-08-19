@@ -16,7 +16,7 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.OkHttpClient;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-12
  */
 public class App extends Application {

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 /**
- * @author 陈志鹏
+ * @author dsly
  * @date 2019-08-12
  */
 public class LoadingDialog extends Dialog {

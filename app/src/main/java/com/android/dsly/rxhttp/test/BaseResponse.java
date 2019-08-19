@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 根据接口数据自定义BaseResponse
- * @author 陈志鹏
+ * @author dsly
  * @date 2018/7/27
  */
 public class BaseResponse<T> implements Serializable {
