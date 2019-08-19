@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:onClick="click1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示dialog"/>
+
+    <Button
+        android:onClick="click2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多baseurl"/>
+
+    <Button
+        android:onClick="click3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传文件"/>
+
+    <Button
+        android:onClick="click4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cookie的使用"/>
+
+    <Button
+        android:onClick="click5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="不使用缓存"/>
+
+    <Button
+        android:onClick="click6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请求网络失败后，读取缓存"/>
+
+    <Button
+        android:onClick="click7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="如果缓存不存在才请求网络，否则使用缓存"/>
+
+    <Button
+        android:onClick="click8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="先使用缓存，不管是否存在，仍然请求网络"/>
+</LinearLayout>
