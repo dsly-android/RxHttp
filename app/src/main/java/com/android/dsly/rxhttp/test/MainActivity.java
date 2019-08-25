@@ -136,6 +136,18 @@ public class MainActivity extends RxAppCompatActivity implements IView {
                 });
     }
 
+    public void click9(View view){
+        RxHttp.createApi(CommonApi.class)
+                .touTiao()
+                .compose(TransformerUtils.<String>packResp(this,true))
+                .subscribe(new CommonObserver<Response<String>>() {
+                    @Override
+                    protected void onSuccess(Response<String> response) {
+                        Log.e("aaa", response.body());
+                    }
+                });
+    }
+
     @Override
     public void showLoading() {
         loading_dialog.show();

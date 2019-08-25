@@ -7,6 +7,7 @@ import com.android.dsly.rxhttp.cache.CacheEntity;
 import com.android.dsly.rxhttp.cache.CacheMode;
 import com.android.dsly.rxhttp.cookie.CookieJarImpl;
 import com.android.dsly.rxhttp.cookie.store.CookieStore;
+import com.android.dsly.rxhttp.interceptor.GzipInterceptor;
 import com.android.dsly.rxhttp.interceptor.HeaderInterceptor;
 import com.android.dsly.rxhttp.utils.RxHttpLog;
 
@@ -67,12 +68,19 @@ public class RxHttp {
         mCacheTime = CacheEntity.CACHE_NEVER_EXPIRE;
 
         RxHttpLog.getConfig().setLogSwitch(BuildConfig.DEBUG);
-        //添加cookie
-        if (mCookieStore != null) {
-            mBuilder.cookieJar(new CookieJarImpl(mCookieStore));
+
+        //添加gzip请求头
+        addCommonHeader("Accept-Encoding", "gzip,deflate");
+        if (mBuilder != null) {
+            //添加cookie
+            if (mCookieStore != null) {
+                mBuilder.cookieJar(new CookieJarImpl(mCookieStore));
+            }
+            //添加头部拦截器，用于添加全局请求头
+            mBuilder.addInterceptor(new HeaderInterceptor(mHeadersMap));
+            //添加返回数据解压拦截器
+            mBuilder.addInterceptor(new GzipInterceptor());
         }
-        //添加头部拦截器，用于添加全局请求头
-        mBuilder.addInterceptor(new HeaderInterceptor(mHeadersMap));
         mRetrofit = new RetrofitBuilder()
                 .setBaseUrl(mBaseUrl)
                 .setCallAdapterFactory(mCallAdapterFactory)

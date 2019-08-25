@@ -55,4 +55,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="先使用缓存，不管是否存在，仍然请求网络"/>
+
+    <Button
+        android:onClick="click9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="gzip数据解压"/>
 </LinearLayout>

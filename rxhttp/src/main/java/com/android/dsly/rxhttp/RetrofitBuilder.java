@@ -2,6 +2,7 @@ package com.android.dsly.rxhttp;
 
 import com.android.dsly.rxhttp.cookie.CookieJarImpl;
 import com.android.dsly.rxhttp.gson.GsonFactory;
+import com.android.dsly.rxhttp.interceptor.GzipInterceptor;
 import com.android.dsly.rxhttp.interceptor.HeaderInterceptor;
 import com.android.dsly.rxhttp.interceptor.HttpLoggingInterceptor;
 import com.android.dsly.rxhttp.utils.HttpsUtils;
@@ -123,6 +124,8 @@ public class RetrofitBuilder {
         }
         //添加头部拦截器，用于添加全局请求头
         builder.addInterceptor(new HeaderInterceptor(RxHttp.getInstance().getHeadersMap()));
+        //添加返回数据解压拦截器
+        builder.addInterceptor(new GzipInterceptor());
 
         return builder.build();
     }
