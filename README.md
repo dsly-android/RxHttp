@@ -1,5 +1,5 @@
 导入：<br>  
-implementation 'com.android.dsly:rxhttp:1.0.2'
+implementation 'com.android.dsly:rxhttp:1.0.3'
 
 初始化：
 ```java

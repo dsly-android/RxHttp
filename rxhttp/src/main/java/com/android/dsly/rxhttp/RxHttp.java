@@ -58,14 +58,14 @@ public class RxHttp {
 
     private RxHttp() {
         mServiceApiCache = new ArrayList<>();
-    }
-
-    public void init(Application app) {
-        mApp = app;
         //默认不缓存
         mCacheMode = CacheMode.NO_CACHE;
         //默认永不过期
         mCacheTime = CacheEntity.CACHE_NEVER_EXPIRE;
+    }
+
+    public void init(Application app) {
+        mApp = app;
 
         RxHttpLog.getConfig().setLogSwitch(BuildConfig.DEBUG);
 
@@ -85,7 +85,7 @@ public class RxHttp {
                 .setBaseUrl(mBaseUrl)
                 .setCallAdapterFactory(mCallAdapterFactory)
                 .setConverterFactory(mConverterFactory)
-                .setOkHttpClient(mBuilder.build())
+                .setOkHttpClient(mBuilder == null ? null : mBuilder.build())
                 .build();
     }
 
