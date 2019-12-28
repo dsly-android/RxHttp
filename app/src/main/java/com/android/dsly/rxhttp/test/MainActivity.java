@@ -12,6 +12,8 @@ import com.android.dsly.rxhttp.observer.CommonObserver;
 import com.android.dsly.rxhttp.utils.TransformerUtils;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
@@ -20,19 +22,34 @@ import retrofit2.Response;
 public class MainActivity extends RxAppCompatActivity implements IView {
 
     private LoadingDialog loading_dialog;
+    private BaseViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModel = ViewModelProviders.of(this).get(BaseViewModel.class);
         loading_dialog = new LoadingDialog(this);
         RetrofitUrlManager.getInstance().putDomain("aaa", "https://api.apiopen.top/");
+
+        viewModel.getShowDialogLiveData().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.e("aaa", aBoolean + "");
+                if (aBoolean) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
     }
 
     public void click1(View view) {
         RxHttp.createApi(CommonApi.class)
                 .getNews()
-                .compose(TransformerUtils.<String>pack(this, true))
+                .compose(TransformerUtils.<String>pack(this))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<String>() {
                     @Override
                     protected void onSuccess(String s) {
@@ -44,7 +61,8 @@ public class MainActivity extends RxAppCompatActivity implements IView {
     public void click2(View view) {
         RxHttp.createApi(CommonApi.class)
                 .getJoke()
-                .compose(TransformerUtils.<String>packResp(this, true))
+                .compose(TransformerUtils.<String>packResp(this))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<Response<String>>() {
                     @Override
                     protected void onSuccess(Response<String> response) {
@@ -56,7 +74,8 @@ public class MainActivity extends RxAppCompatActivity implements IView {
     public void click3(View view) {
         RxHttp.uploadFile("http://t.xinhuo.com/index.php/Api/Pic/uploadPic",
                 "", "/sdcard/yunk/yunkImg/5cc7b2a9ab22e.jpg")
-                .compose(TransformerUtils.<String>pack(this, true))
+                .compose(TransformerUtils.<String>pack(this))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<String>() {
                     @Override
                     protected void onSuccess(String s) {
@@ -80,7 +99,8 @@ public class MainActivity extends RxAppCompatActivity implements IView {
     public void click5(View view) {
         RxHttp.createApi(CommonApi.class)
                 .getJoke()
-                .compose(TransformerUtils.<String>noCachePackResp(this, true))
+                .compose(TransformerUtils.<String>noCachePackResp(this))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<RxHttpResponse<String>>() {
                     @Override
                     protected void onSuccess(RxHttpResponse<String> response) {
@@ -92,20 +112,21 @@ public class MainActivity extends RxAppCompatActivity implements IView {
     public void click6(View view) {
         RxHttp.createApi(CommonApi.class)
                 .getJoke()
-                .compose(TransformerUtils.<String>cachePackResp(this, true,"click6", CacheMode.REQUEST_FAILED_READ_CACHE))
+                .compose(TransformerUtils.<String>cachePackResp(this, "click6", CacheMode.REQUEST_FAILED_READ_CACHE))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<RxHttpResponse<String>>() {
                     @Override
                     protected void onSuccess(RxHttpResponse<String> response) {
                         Log.e("aaa", response.isFromCache() + "  " + response.body());
-                        Log.e("aaa",response.getHeadersMap().toString());
                     }
                 });
     }
 
-    public void click7(View view){
+    public void click7(View view) {
         RxHttp.createApi(CommonApi.class)
                 .getJoke()
-                .compose(TransformerUtils.<String>cachePackResp(this, true,"click7", CacheMode.IF_NONE_CACHE_REQUEST))
+                .compose(TransformerUtils.<String>cachePackResp(this, "click7", CacheMode.IF_NONE_CACHE_REQUEST))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<RxHttpResponse<String>>() {
                     @Override
                     protected void onSuccess(RxHttpResponse<String> response) {
@@ -114,15 +135,16 @@ public class MainActivity extends RxAppCompatActivity implements IView {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("aaa",e.getMessage());
+                        Log.e("aaa", e.getMessage());
                     }
                 });
     }
 
-    public void click8(View view){
+    public void click8(View view) {
         RxHttp.createApi(CommonApi.class)
                 .getJoke()
-                .compose(TransformerUtils.<String>cachePackResp(this, true,"click8", CacheMode.FIRST_CACHE_THEN_REQUEST))
+                .compose(TransformerUtils.<String>cachePackResp(this, "click8", CacheMode.FIRST_CACHE_THEN_REQUEST))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<RxHttpResponse<String>>() {
                     @Override
                     protected void onSuccess(RxHttpResponse<String> response) {
@@ -131,15 +153,16 @@ public class MainActivity extends RxAppCompatActivity implements IView {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("aaa",e.getMessage());
+                        Log.e("aaa", e.getMessage());
                     }
                 });
     }
 
-    public void click9(View view){
+    public void click9(View view) {
         RxHttp.createApi(CommonApi.class)
                 .touTiao()
-                .compose(TransformerUtils.<String>packResp(this,true))
+                .compose(TransformerUtils.<String>packResp(this))
+                .compose(RxUtils.showDialog(viewModel))
                 .subscribe(new CommonObserver<Response<String>>() {
                     @Override
                     protected void onSuccess(Response<String> response) {

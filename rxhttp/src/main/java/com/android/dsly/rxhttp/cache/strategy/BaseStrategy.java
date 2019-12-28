@@ -73,7 +73,6 @@ public abstract class BaseStrategy<T> {
             return observable.onErrorResumeNext(new Function<Throwable, ObservableSource<? extends RxHttpResponse<T>>>() {
                 @Override
                 public ObservableSource<? extends RxHttpResponse<T>> apply(Throwable throwable) throws Exception {
-                    RxHttpLog.e("cacheneedempty");
                     return Observable.empty();
                 }
             });

@@ -33,7 +33,7 @@ public abstract class DataObserver<T> extends BaseObserver<T> {
             if (((BaseResponse) baseResponse).getCode() == 200) {
                 onSuccess(t);
             } else {
-                onError(new IllegalStateException("code:" + ((BaseResponse) baseResponse).getCode() + "     msg:" + ((BaseResponse) baseResponse).getMsg()));
+                onError(new IllegalStateException(((BaseResponse) baseResponse).getMsg()));
             }
         } else {
             onSuccess(t);
