@@ -41,14 +41,19 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public void onError(@NonNull Throwable e) {
         RxHttpLog.e(e);
         String errorMsg = handleException(e);
-        onError(errorMsg);
+        if (e instanceof HttpException) {
+            onError(((HttpException) e).code(), errorMsg);
+        } else {
+            onError(0, errorMsg);
+        }
     }
 
     /**
      * 接口请求失败回调
+     *
      * @param errorMsg
      */
-    protected void onError(String errorMsg) {
+    protected void onError(int code, String errorMsg) {
         RxHttpLog.e(errorMsg);
     }
 
@@ -74,8 +79,6 @@ public abstract class BaseObserver<T> implements Observer<T> {
             msg = "空指针异常";
         } else if (e instanceof SSLHandshakeException) {
             msg = "证书验证失败";
-        } else if (e instanceof IllegalStateException) {
-            msg = e.getMessage();
         }
         return msg;
     }
