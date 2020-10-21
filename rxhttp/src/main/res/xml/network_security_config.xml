@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--cleartextTrafficPermitted:是否使用明文传输，就是http-->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!--信任系统的证书-->
+            <certificates
+                overridePins="true"
+                src="system" />
+            <!--信任用户的证书，添加这个后才可以抓包，不能抓包只对https有效-->
+            <!--<certificates src="user" overridePins="true" />-->
+        </trust-anchors>
+    </base-config>
+</network-security-config>

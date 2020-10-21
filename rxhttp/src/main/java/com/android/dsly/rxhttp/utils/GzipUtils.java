@@ -3,6 +3,7 @@ package com.android.dsly.rxhttp.utils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -30,11 +31,23 @@ public class GzipUtils {
         if (str == null || str.length() == 0) {
             return null;
         }
+        try {
+            return compress(str.getBytes(encoding));
+        } catch (UnsupportedEncodingException e) {
+            RxHttpLog.e(e);
+            return null;
+        }
+    }
+
+    public static byte[] compress(byte[] datas) {
+        if (datas == null || datas.length == 0) {
+            return null;
+        }
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         GZIPOutputStream gzipInputStream;
         try {
             gzipInputStream = new GZIPOutputStream(out);
-            gzipInputStream.write(str.getBytes(encoding));
+            gzipInputStream.write(datas);
             gzipInputStream.close();
         } catch (IOException e) {
             RxHttpLog.e("gzip compress error");

@@ -67,6 +67,7 @@ public class RxHttp {
     public void init(Application app) {
         mApp = app;
 
+        RxHttpLog.getConfig().setGlobalTag("RxHttp");
         RxHttpLog.getConfig().setLogSwitch(BuildConfig.DEBUG);
 
         //添加gzip请求头

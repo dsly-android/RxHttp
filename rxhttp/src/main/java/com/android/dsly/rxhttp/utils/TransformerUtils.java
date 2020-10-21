@@ -54,17 +54,29 @@ public class TransformerUtils {
      *
      * @return
      */
+    public static <T> ObservableTransformer<T, T> pack() {
+        return pack(null);
+    }
+
     public static <T> ObservableTransformer<T, T> pack(final LifecycleProvider provider) {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> upstream) {
                 Observable<T> observable = upstream
                         .retryWhen(new RetryWithDelay(3, 2))
-                        .subscribeOn(Schedulers.io());
-                return observable.observeOn(AndroidSchedulers.mainThread())
-                        .compose(RxLifecycleUtils.<T>bindToLifecycle(provider));
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+                if (provider == null) {
+                    return observable;
+                } else {
+                    return observable.compose(RxLifecycleUtils.<T>bindToLifecycle(provider));
+                }
             }
         };
+    }
+
+    public static <T> ObservableTransformer<Response<T>, Response<T>> packResp() {
+        return packResp(null);
     }
 
     public static <T> ObservableTransformer<Response<T>, Response<T>> packResp(final LifecycleProvider provider) {
@@ -73,9 +85,13 @@ public class TransformerUtils {
             public ObservableSource<Response<T>> apply(Observable<Response<T>> upstream) {
                 Observable<Response<T>> observable = upstream
                         .retryWhen(new RetryWithDelay(3, 2))
-                        .subscribeOn(Schedulers.io());
-                return observable.observeOn(AndroidSchedulers.mainThread())
-                        .compose(RxLifecycleUtils.<Response<T>>bindToLifecycle(provider));
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+                if (provider == null) {
+                    return observable;
+                } else {
+                    return observable.compose(RxLifecycleUtils.<Response<T>>bindToLifecycle(provider));
+                }
             }
         };
     }
@@ -83,16 +99,32 @@ public class TransformerUtils {
     /**
      * 缓存、重试、切换线程、绑定生命周期
      */
+    public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> noCachePackResp() {
+        return cachePackResp(null, null, CacheMode.NO_CACHE);
+    }
+
     public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> noCachePackResp(LifecycleProvider provider) {
         return cachePackResp(provider, null, CacheMode.NO_CACHE);
+    }
+
+    public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> cachePackResp(String key) {
+        return cachePackResp(null, key);
     }
 
     public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> cachePackResp(LifecycleProvider provider, String key) {
         return cachePackResp(provider, key, RxHttp.getInstance().getCacheMode());
     }
 
+    public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> cachePackResp(String key, CacheMode cacheMode) {
+        return cachePackResp(null, key, cacheMode);
+    }
+
     public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> cachePackResp(LifecycleProvider provider, String key, CacheMode cacheMode) {
         return cachePackResp(provider, key, cacheMode, RxHttp.getInstance().getCacheTime());
+    }
+
+    public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> cachePackResp(String key, CacheMode cacheMode, long cacheTime) {
+        return cachePackResp(null, key, cacheMode, cacheTime);
     }
 
     public static <T> ObservableTransformer<Response<T>, RxHttpResponse<T>> cachePackResp(final LifecycleProvider provider, final String key, final CacheMode cacheMode, final long cacheTime) {
