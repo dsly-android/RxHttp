@@ -9,7 +9,6 @@ import com.android.dsly.rxhttp.cookie.CookieJarImpl;
 import com.android.dsly.rxhttp.cookie.store.CookieStore;
 import com.android.dsly.rxhttp.interceptor.GzipInterceptor;
 import com.android.dsly.rxhttp.interceptor.HeaderInterceptor;
-import com.android.dsly.rxhttp.utils.RxHttpLog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,9 +65,6 @@ public class RxHttp {
 
     public void init(Application app) {
         mApp = app;
-
-        RxHttpLog.getConfig().setGlobalTag("RxHttp");
-        RxHttpLog.getConfig().setLogSwitch(BuildConfig.DEBUG);
 
         //添加gzip请求头
         addCommonHeader("Accept-Encoding", "gzip,deflate");

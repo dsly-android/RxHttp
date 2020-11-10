@@ -8,6 +8,7 @@ import com.android.dsly.rxhttp.cache.CacheMode;
 import com.android.dsly.rxhttp.cookie.store.SPCookieStore;
 import com.android.dsly.rxhttp.interceptor.HttpLoggingInterceptor;
 import com.android.dsly.rxhttp.utils.HttpsUtils;
+import com.android.dsly.rxhttp.utils.RxHttpLog;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -24,8 +25,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        RxHttpLog.getConfig().setGlobalTag("RxHttp");
+        RxHttpLog.getConfig().setLogSwitch(BuildConfig.DEBUG);
 
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        OkHttpClient.Builder builder = RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder());
 
         //全局的读取超时时间
         builder.readTimeout(RxHttp.DEFAULT_MILLISECONDS / 2, TimeUnit.MILLISECONDS);
@@ -58,7 +61,7 @@ public class App extends Application {
 
         RxHttp.getInstance()
                 .setBaseUrl("https://www.apiopen.top/")
-                .setOkHttpClientBuild(RetrofitUrlManager.getInstance().with(builder))
+                .setOkHttpClientBuild(builder)
 //                .addCommonHeader("aaa","aaa")  //全局公共头
 //                .addCommonHeaders(new LinkedHashMap<String, String>())   //全局公共头
                 .setCookieType(new SPCookieStore(this)) //使用sp保持cookie，如果cookie不过期，则一直有效

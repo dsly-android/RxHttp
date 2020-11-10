@@ -55,16 +55,18 @@ public class TransformerUtils {
      * @return
      */
     public static <T> ObservableTransformer<T, T> pack() {
-        return pack(null);
+        return pack(null, true);
     }
 
-    public static <T> ObservableTransformer<T, T> pack(final LifecycleProvider provider) {
+    public static <T> ObservableTransformer<T, T> pack(final LifecycleProvider provider, final boolean isRetry) {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> upstream) {
-                Observable<T> observable = upstream
-                        .retryWhen(new RetryWithDelay(3, 2))
-                        .subscribeOn(Schedulers.io())
+                Observable<T> observable = upstream;
+                if (isRetry) {
+                    observable = upstream.retryWhen(new RetryWithDelay(3, 2));
+                }
+                observable = observable.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
                 if (provider == null) {
                     return observable;
