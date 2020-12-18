@@ -96,6 +96,10 @@ public class RxHttpResponse<T> {
 
     @Override
     public String toString() {
-        return rawResponse.toString();
+        if (rawResponse != null) {
+            return rawResponse.toString();
+        } else {
+            return null;
+        }
     }
 }

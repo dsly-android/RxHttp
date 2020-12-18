@@ -61,4 +61,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="gzip数据解压"/>
+
+    <Button
+        android:onClick="click10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下载文件"/>
 </LinearLayout>

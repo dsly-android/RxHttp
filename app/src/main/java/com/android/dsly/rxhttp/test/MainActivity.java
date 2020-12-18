@@ -9,8 +9,11 @@ import com.android.dsly.rxhttp.RxHttp;
 import com.android.dsly.rxhttp.cache.CacheMode;
 import com.android.dsly.rxhttp.model.RxHttpResponse;
 import com.android.dsly.rxhttp.observer.CommonObserver;
+import com.android.dsly.rxhttp.observer.DownloadObserver;
 import com.android.dsly.rxhttp.utils.TransformerUtils;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+
+import java.io.File;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -167,6 +170,23 @@ public class MainActivity extends RxAppCompatActivity implements IView {
                     @Override
                     protected void onSuccess(Response<String> response) {
                         Log.e("aaa", response.body());
+                    }
+                });
+    }
+
+    public void click10(View view) {
+        File file = new File(getExternalCacheDir(), "aaa.apk");
+        RxHttp.downloadFile("https://34463b61b3ace6b08aa8d549200b179c.dlied1.cdntips.net/imtt.dd.qq.com/16891/apk/CD08ABAE3EEB07AE136108D5EA708E31.apk?mkey=5fdc461b1b9af0bb&f=1ea1&fsname=com.xiachufang_7.6.8_606.apk&csr=1bbd&cip=27.154.214.78&proto=https")
+                .subscribe(new DownloadObserver(file.getAbsolutePath()) {
+                    @Override
+                    public void onSuccess(String path) {
+                        Log.i("aaa","onFinish:" + path);
+                    }
+
+                    @Override
+                    protected void onError(int code, String errorMsg) {
+                        super.onError(code, errorMsg);
+                        Log.i("aaa","onError");
                     }
                 });
     }

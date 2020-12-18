@@ -2,6 +2,7 @@ package com.android.dsly.rxhttp;
 
 import android.app.Application;
 
+import com.android.dsly.rxhttp.api.DownloadFileApi;
 import com.android.dsly.rxhttp.api.UploadFileApi;
 import com.android.dsly.rxhttp.cache.CacheEntity;
 import com.android.dsly.rxhttp.cache.CacheMode;
@@ -17,10 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -289,5 +292,16 @@ public class RxHttp {
 
         return createApi(UploadFileApi.class)
                 .uploadFiles(uploadUrl, parts);
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param url 要下载的文件路径
+     */
+    public static Observable<ResponseBody> downloadFile(String url){
+        return createApi(DownloadFileApi.class)
+                .download(url)
+                .subscribeOn(Schedulers.io());
     }
 }

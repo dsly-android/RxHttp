@@ -58,6 +58,10 @@ public class TransformerUtils {
         return pack(null, true);
     }
 
+    public static <T> ObservableTransformer<T, T> pack(LifecycleProvider provider) {
+        return pack(provider, true);
+    }
+
     public static <T> ObservableTransformer<T, T> pack(final LifecycleProvider provider, final boolean isRetry) {
         return new ObservableTransformer<T, T>() {
             @Override
