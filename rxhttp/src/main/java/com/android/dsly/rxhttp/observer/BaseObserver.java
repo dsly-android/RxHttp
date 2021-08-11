@@ -58,7 +58,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     }
 
     public String handleException(Throwable e) {
-        String msg = "未知错误";
+        String msg = e.getMessage();
         if (e instanceof UnknownHostException) {
             msg = "网络不可用";
         } else if (e instanceof SocketTimeoutException) {

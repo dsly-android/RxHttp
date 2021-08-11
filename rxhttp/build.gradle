@@ -1,10 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
-
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 17
@@ -13,7 +11,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -50,13 +47,4 @@ dependencies {
     api 'me.jessyan:retrofit-url-manager:1.4.0'
     //utils
     api 'com.blankj:utilcodex:1.29.0'
-}
-
-publish {
-    userOrg = 'a951028743'      //bintray注册的用户名
-    groupId = 'com.android.dsly'         //compile引用时的第1部分groupId
-    artifactId = 'rxhttp'     //compile引用时的第2部分项目名
-    publishVersion = '1.1.0'    //compile引用时的第3部分版本号
-    desc = '封装retrofit'
-    website = ''
 }

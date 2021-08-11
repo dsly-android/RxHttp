@@ -4,6 +4,7 @@ package com.android.dsly.rxhttp.cache.strategy;
 import com.android.dsly.rxhttp.RxHttp;
 import com.android.dsly.rxhttp.cache.CacheEntity;
 import com.android.dsly.rxhttp.cache.CacheMode;
+import com.android.dsly.rxhttp.cache.ICacheListener;
 import com.android.dsly.rxhttp.db.CacheManager;
 import com.android.dsly.rxhttp.model.HttpHeaders;
 import com.android.dsly.rxhttp.model.RxHttpResponse;
@@ -126,7 +127,8 @@ public abstract class BaseStrategy<T> {
      * 将请求结果保存到数据库
      */
     protected void saveCache(final Headers responseHeaders, final T data) {
-        if (mCacheMode == CacheMode.NO_CACHE) {
+        ICacheListener cacheListener = RxHttp.getInstance().getCacheListener();
+        if (mCacheMode == CacheMode.NO_CACHE || (cacheListener != null && !cacheListener.isNeedCache(responseHeaders, data))) {
             return;
         }
         Observable.create(new ObservableOnSubscribe<Boolean>() {

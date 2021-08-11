@@ -6,6 +6,7 @@ import com.android.dsly.rxhttp.api.DownloadFileApi;
 import com.android.dsly.rxhttp.api.UploadFileApi;
 import com.android.dsly.rxhttp.cache.CacheEntity;
 import com.android.dsly.rxhttp.cache.CacheMode;
+import com.android.dsly.rxhttp.cache.ICacheListener;
 import com.android.dsly.rxhttp.cookie.CookieJarImpl;
 import com.android.dsly.rxhttp.cookie.store.CookieStore;
 import com.android.dsly.rxhttp.interceptor.GzipInterceptor;
@@ -49,6 +50,10 @@ public class RxHttp {
     private Application mApp;     //全局上下文
     private CacheMode mCacheMode; //全局缓存模式
     private long mCacheTime;      //全局缓存过期时间,默认永不过期，单位毫秒
+    /**
+     * 缓存监听器
+     */
+    private ICacheListener mCacheListener;
 
     public static RxHttp getInstance() {
         return LazyHolder.INSTANCE;
@@ -208,6 +213,18 @@ public class RxHttp {
      */
     public long getCacheTime() {
         return mCacheTime;
+    }
+
+    /**
+     * 缓存监听器
+     */
+    public RxHttp setCacheListener(ICacheListener listener){
+        mCacheListener = listener;
+        return this;
+    }
+
+    public ICacheListener getCacheListener() {
+        return mCacheListener;
     }
 
     /**

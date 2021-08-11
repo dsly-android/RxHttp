@@ -10,6 +10,7 @@ import com.android.dsly.rxhttp.interceptor.HttpLoggingInterceptor;
 import com.android.dsly.rxhttp.utils.HttpsUtils;
 import com.android.dsly.rxhttp.utils.RxHttpLog;
 
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -29,6 +30,9 @@ public class App extends Application {
         RxHttpLog.getConfig().setLogSwitch(BuildConfig.DEBUG);
 
         OkHttpClient.Builder builder = RetrofitUrlManager.getInstance().with(new OkHttpClient.Builder());
+
+        //不使用代理，防止抓包
+        builder.proxy(Proxy.NO_PROXY);
 
         //全局的读取超时时间
         builder.readTimeout(RxHttp.DEFAULT_MILLISECONDS / 2, TimeUnit.MILLISECONDS);
@@ -69,6 +73,7 @@ public class App extends Application {
 //                .setCookieType(new DBCookieStore(this)) ////使用数据库保持cookie，如果cookie不过期，则一直有效
                 .setCacheMode(CacheMode.NO_CACHE) //缓存模式，默认不缓存
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)  //缓存过期时间，默认远不过期
+                .setCacheListener(new AppCacheListener()) //缓存监听器
                 .init(this);
     }
 }
