@@ -38,7 +38,6 @@ public class MainActivity extends RxAppCompatActivity implements IView {
         viewModel.getShowDialogLiveData().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                Log.e("aaa", aBoolean + "");
                 if (aBoolean) {
                     showLoading();
                 } else {
